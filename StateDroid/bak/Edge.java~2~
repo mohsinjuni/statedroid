@@ -1,0 +1,7 @@
+package cfg;
+
+public abstract class Edge extends CFGComponent {
+
+	private String key;
+
+}

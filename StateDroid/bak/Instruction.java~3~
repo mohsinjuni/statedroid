@@ -1,0 +1,12 @@
+package cfg;
+import analyzer.*;
+public class Instruction extends CFGComponent
+{
+
+	public void accept(Analyzer a)
+	{
+		a.analyze(this);
+	}
+
+
+}

@@ -1,0 +1,65 @@
+package controller;
+import java.util.*;
+import cfg.*;
+import analyzer.*;
+import symboltable.*;
+
+public class Controller {
+
+	public static void main(String args[])
+        {
+           SymbolTable symTable=new SymbolTable();
+
+		CFGComponent ipCFG = new InterProcCFG();
+		ipCFG.setKey("ipCFG");
+
+		CFGComponent cfg1 = new CFG();
+		cfg1.setKey("cfg1");
+
+		//CFG1-BB1
+		CFGComponent bb1 = new BasicBlock();
+		bb1.setKey("bb1");
+                symTable.addBlock(bb1);
+		for(int i=0; i < 4; i++) //*** loop from 0 not 1
+		{
+			CFGComponent inst = new Instruction();
+			inst.setKey("bb1-inst" + i);
+			bb1.addItem(inst);
+		}
+		//CFG1-BB2
+		CFGComponent bb2 = new BasicBlock();
+		bb2.setKey("bb2");
+		for(int i=1; i < 4; i++)
+		{
+			Instruction inst = new Instruction();
+			inst.setKey("bb2-inst" + i);
+			bb2.addItem(inst);
+		}
+		cfg1.addItem(bb1);
+		cfg1.addItem(bb2);
+
+		CFGComponent cfg2 = new CFG();
+		cfg2.setKey("cfg2");
+
+
+		CFGComponent bb3 = new BasicBlock();
+		bb3.setKey("bb3");
+		for(int i=1; i < 4; i++)
+		{
+			Instruction inst = new Instruction();
+			inst.setKey("bb3-inst" + i);
+			bb3.addItem(inst);
+		}
+
+		cfg2.addItem(bb3);
+
+		ipCFG.addItem(cfg1);
+		ipCFG.addItem(cfg2);
+
+		Analyzer a = new TaintAnalyzer();
+		ipCFG.accept(a);
+
+
+
+	}
+}

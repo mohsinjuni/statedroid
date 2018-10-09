@@ -1,0 +1,59 @@
+package cfg;
+import java.util.ArrayList;
+import java.util.Iterator;
+import analyzer.*;
+
+public class InterProcCFG extends CFGComponent {
+
+	private CFGComponent cfg;
+	private ArrayList<CFGComponent> cfgList;
+	private Analyzer analyzer;
+
+	public InterProcCFG()
+	{
+		cfgList = new ArrayList<CFGComponent>();
+	}
+
+	public void addItem(CFGComponent comp)
+	{
+		cfgList.add(comp);
+	}
+
+	//@Override
+	public boolean removeItem(CFGComponent comp)
+	{
+		cfgList.remove(comp);
+		return true;
+	}
+
+	//@Override
+	public Iterator iterator()
+	{
+		return this.cfgList.iterator();
+	}
+
+	public void accept(Analyzer a)
+	{
+		Iterator iterator = cfgList.iterator();
+		while(iterator.hasNext())
+		{
+			CFGComponent comp = (CFGComponent)iterator.next();
+			comp.accept(a);
+		}
+		a.analyze(this);
+
+	}
+
+//	public void setAnalayzerType(Analyzer a)
+//	{
+//		this.analyzer = a;
+//	}
+	public String getKey()
+	{
+		return this.key;
+	}
+	public void setKey(String key)
+	{
+		this.key = key;
+	}
+}

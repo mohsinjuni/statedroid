@@ -1,0 +1,59 @@
+package cfg;
+
+import java.util.*;
+import java.util.Iterator;
+
+public class CFG extends CFGComponent {
+
+
+	ArrayList<CFGComponent> compCollection;
+
+	public CFG()
+	{
+		compCollection = new ArrayList<CFGComponent>();
+	}
+
+	public void addItem(CFGComponent comp)
+	{
+		compCollection.add(comp);
+	}
+
+	//@Override
+	public boolean removeItem(CFGComponent comp)
+	{
+		compCollection.remove(comp);
+		return true;
+	}
+
+	//@Override
+	public Iterator iterator() {
+		// TODO Auto-generated method stub
+		return this.compCollection.iterator();
+	}
+
+	public void accept(Analyzer a)
+	{
+		Iterator iterator = compCollection.iterator();
+		while(iterator.hasNext())
+		{
+			CFGComponent comp = (CFGComponent)iterator.next();
+			comp.accept(a);
+		}
+		a.analyze(this);
+
+	}
+
+	public void setAnalayzeType()
+	{
+
+	}
+	public String getKey()
+	{
+		return this.key;
+	}
+	public void setKey(String key)
+	{
+		this.key = key;
+	}
+
+}

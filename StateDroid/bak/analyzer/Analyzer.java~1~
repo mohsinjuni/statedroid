@@ -1,0 +1,17 @@
+
+
+public abstract class Analyzer {
+
+	private InterProcCFG ipCFG;
+
+	public void analyze(Instruction ins){}
+	public void analyze(BasicBlock bb){}
+	public void analyze(CFG cfg){}
+	public void analyze(InterProcCFG iepCFG){}
+
+	public void setContext(InterProcCFG ipCFG)
+	{
+		this.ipCFG = ipCFG;
+	}
+
+}

@@ -1,0 +1,62 @@
+package analyzer;
+import cfg.*;
+import symboltable.*;
+import java.util.*;
+public class TaintAnalyzer extends Analyzer {
+   public TaintAnalyzer() {
+      super();
+   }
+
+	//@Override
+	public void analyze(Instruction ins)
+	{
+           System.out.println("Instruction " + ins.getKey() + " -- analyzed");
+           String[] used=ins.getUsed();
+           boolean tainted=false;
+           for(int i=0; i<used.length; i++) {
+              SymbolTableEntry entry=symTable.find(used[i]);
+              if (entry.isTainted()) {
+                 tainted = true;
+                 break;
+              }
+           }
+           if (tainted) {
+              String changed=ins.getChanged();
+              SymbolTableEntry entry=symTable.find(changed);
+              if (entry==null) {
+                 entry=new SymbolTableEntry();
+                 entry.setName(changed);
+                 // set other attributes including setTainted=true
+                 symTable.addEntry(entry);
+              } else {
+                 entry.setTainted(true);
+              }
+           }
+	}
+
+
+	//@Override
+	public void analyze(BasicBlock bb){
+		System.out.println("Basic Block " + bb.getKey() + " -- analyzed");
+           symTable.addBlock(bb);
+           Iterator it=bb.iterator();
+           while (it.hasNext()) {
+              CFGComponent comp=(CFGComponent)it.next();
+              comp.accept(this);
+           }
+           symTable.pop();
+	}
+
+	//@Override
+	public void analyze(CFG cfg)
+	{
+           // do the same as with analyze(BB) above
+		System.out.println("CFG " + cfg.getKey() + " -- analyzed");
+	}
+
+	//@Override
+	public void analyze(InterProcCFG iepCFG)
+	{
+		System.out.println("CFG " + iepCFG.getKey() + " -- analyzed");
+	}
+}

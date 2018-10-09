@@ -1,0 +1,9 @@
+package cfg;
+
+public class BasicBlockEdge extends Edge {
+
+	BasicBlock source;
+	BasicBlock destination;
+
+
+}

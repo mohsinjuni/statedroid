@@ -1,0 +1,60 @@
+package cfg;
+import java.util.ArrayList;
+import java.util.Iterator;
+
+
+public class BasicBlock extends CFGComponent implements  Iterable<CFGComponent> {
+
+
+	ArrayList<CFGComponent> instrList;
+
+	public BasicBlock()
+	{
+		instrList = new ArrayList<CFGComponent>();
+	}
+
+	@Override
+	public void addItem(CFGComponent comp)
+	{
+		instrList.add(comp);
+	}
+
+	@Override
+	public boolean removeItem(CFGComponent comp)
+	{
+		instrList.remove(comp);
+		return true;
+	}
+
+////	@Override
+	public Iterator iterator() {
+		Iterator<CFGComponent> iterator = instrList.iterator();
+		return iterator;
+	}
+
+	public void accept(Analyzer a)
+	{
+		Iterator<CFGComponent> iterator = instrList.iterator();
+		while(iterator.hasNext())
+		{
+			CFGComponent comp = (CFGComponent)iterator.next();
+			comp.accept(a);
+		}
+		a.analyze(this);
+
+	}
+
+	public void setAnalayzeType()
+	{
+
+	}
+
+	public String getKey()
+	{
+		return this.key;
+	}
+	public void setKey(String key)
+	{
+		this.key = key;
+	}
+}

@@ -1,0 +1,38 @@
+package analyzer;
+import cfg.*;
+import symboltable.*;
+public class TaintAnalyzer extends Analyzer {
+   public TaintAnalyzer() {
+      super();
+   }
+
+	//@Override
+	public void analyze(Instruction ins)
+	{
+           System.out.println("Instruction " + ins.getKey() + " -- analyzed");
+           String[] used=ins.getUsed();
+           for(int i=0; i<used; i++) {
+              SymbolTableEntry entry=symTable.find(used[i]);
+           }
+
+
+	}
+
+
+	//@Override
+	public void analyze(BasicBlock bb){
+		System.out.println("Basic Block " + bb.getKey() + " -- analyzed");
+	}
+
+	//@Override
+	public void analyze(CFG cfg)
+	{
+		System.out.println("CFG " + cfg.getKey() + " -- analyzed");
+	}
+
+	//@Override
+	public void analyze(InterProcCFG iepCFG)
+	{
+		System.out.println("CFG " + iepCFG.getKey() + " -- analyzed");
+	}
+}

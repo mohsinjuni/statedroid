@@ -1,0 +1,27 @@
+package analyzer;
+public class TaintAnalyzer extends Analyzer {
+
+	@Override
+	public void analyze(Instruction ins)
+	{
+		System.out.println("Instruction " + ins.getKey() + " -- analyzed");
+	}
+
+
+	@Override
+	public void analyze(BasicBlock bb){
+		System.out.println("Basic Block " + bb.getKey() + " -- analyzed");
+	}
+
+	@Override
+	public void analyze(CFG cfg)
+	{
+		System.out.println("CFG " + cfg.getKey() + " -- analyzed");
+	}
+
+	@Override
+	public void analyze(InterProcCFG iepCFG)
+	{
+		System.out.println("CFG " + iepCFG.getKey() + " -- analyzed");
+	}
+}

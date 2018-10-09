@@ -1,0 +1,22 @@
+package cfg;
+import java.util.Iterator;
+
+
+public class CFGComponent {
+
+	protected String key;
+	public void accept(Analyzer a){}
+
+
+	public void addItem(CFGComponent c){}
+	public boolean removeItem(CFGComponent c){ return false;}
+	public Iterator<CFGComponent> iterator(){ return null;}
+//	public void addItem(CFGComponent c){}
+
+	public String getKey() {
+		return key;
+	}
+	public void setKey(String key) {
+		this.key = key;
+	}
+}

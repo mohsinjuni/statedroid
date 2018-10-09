@@ -1,0 +1,6 @@
+
+public class CFGEdge extends Edge{
+
+	CFG source;
+	CFG destination;
+}

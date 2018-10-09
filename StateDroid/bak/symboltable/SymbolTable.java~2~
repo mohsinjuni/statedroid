@@ -1,0 +1,26 @@
+package symboltable;
+
+/**Copied from Team4 source code
+ *
+ * Symbol Table. Represents an item in a symbol table
+ * @author Faisal Ladhak
+ *
+ */
+import java.util.*;
+import cfg.*;
+
+public class SymbolTable {
+   Stack entries=new Stack();
+   Hashtable curHash;
+   public void addBlock(BasicBlock bb) {
+      curHash=new Hashtable();
+      entries.push(curHash);
+   }
+   public boolean addEntry(SymbolTableEntry entry) {
+      if (curHash.get(entry.getName()) != null)
+         return false;
+      else
+         curHash.put(entry.getName(), entry);
+      return true;
+   }
+}

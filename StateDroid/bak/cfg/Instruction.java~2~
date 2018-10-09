@@ -1,0 +1,15 @@
+package cfg;
+import analyzer.*;
+public class Instruction extends CFGComponent
+{
+
+	public void accept(Analyzer a)
+	{
+		a.analyze(this);
+	}
+   public String[] getUsed() {
+      // return the variables in the right-hand side
+      return new String[] {"x", "y", "z"};
+   }
+
+}
